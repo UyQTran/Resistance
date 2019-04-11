@@ -4,27 +4,35 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 const resistanceTextFieldStyles = {
   input: {
-    color: 'white',
+    color: '#4c5052',
   },
   label: {
-    color: 'white'
+    color: '#4c5052'
+  },
+  underline: {
+    '&:hover': {
+      '&:before': {
+        borderBottom: ['#4c5052', '!important'],
+      }
+    },
+    '&:before': {
+      borderBottom: '#4c5052',
+    }
   }
 };
 
 const ResistanceTextField = ({children, classes, ...other}) => (
   <TextField
-    style={{borderBottom: '2px solid white'}}
-    fullWidth
     classes={{
       label: classes.label
     }}
     InputProps={{
       classes: {
         input: classes.input,
-        label: classes.label
+        label: classes.label,
+        underline: classes.underline
       },
-      className: classes.input,
-      disableUnderline: true
+      className: classes.input
     }}
     {...other}
   >

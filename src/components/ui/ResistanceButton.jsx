@@ -16,13 +16,13 @@ const resistanceButtonStyles = {
   },
 };
 
-const ResistanceButton = ({children, classes}) => (
+const ResistanceButton = ({children, classes, ...other}) => (
   <Button
-    fullWidth
     classes={{
       root: classes.root,
       label: classes.label
     }}
+    {...other}
   >
     {children}
   </Button>
