@@ -23,16 +23,9 @@ const resistanceTextFieldStyles = {
 
 const ResistanceTextField = ({children, classes, ...other}) => (
   <TextField
-    classes={{
-      label: classes.label
-    }}
+    classes={classes.label}
     InputProps={{
-      classes: {
-        input: classes.input,
-        label: classes.label,
-        underline: classes.underline
-      },
-      className: classes.input
+      classes
     }}
     {...other}
   >
