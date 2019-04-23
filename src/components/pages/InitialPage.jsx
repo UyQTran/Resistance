@@ -3,6 +3,7 @@ import ResistanceButton from "../ui/ResistanceButton";
 import './InitialPage.css'
 import ResistanceTextField from "../ui/ResistanceTextField";
 import {connect} from "react-redux";
+import {createGame, joinGame} from "../../reducers";
 
 class InitialPage extends Component {
   constructor(props) {
@@ -13,14 +14,20 @@ class InitialPage extends Component {
     };
 
     this.onReadableGameIdChange = this.onReadableGameIdChange.bind(this);
+    this.onJoinClick = this.onJoinClick.bind(this);
+    this.onCreateClick = this.onCreateClick.bind(this);
   }
 
   onReadableGameIdChange(event) {
     this.setState({readableGameId: event.value});
   }
 
-  onJoinClick(event) {
+  onJoinClick() {
+    this.props.submitJoin(this.state.readableGameId);
+  }
 
+  onCreateClick() {
+    this.props.submitCreate();
   }
 
   render() {
@@ -30,10 +37,10 @@ class InitialPage extends Component {
         <div className="initial-page-card-container">
           <ResistanceTextField value={this.state.readableGameId} onChange={this.onReadableGameIdChange} label="Hei" fullWidth/>
           <div className="button-container">
-            <ResistanceButton fullWidth>
+            <ResistanceButton onClick={this.onJoinClick} fullWidth>
               join game
             </ResistanceButton>
-            <ResistanceButton fullWidth>
+            <ResistanceButton onClick={this.onCreateClick} fullWidth>
               create game
             </ResistanceButton>
           </div>
@@ -43,6 +50,15 @@ class InitialPage extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    submitJoin: readableGameId => {
+      dispatch(joinGame(readableGameId))
+    },
+    submitCreate: readableGameId => {
+      dispatch(createGame(readableGameId))
+    }
+  }
+};
 
-
-export default connect()(InitialPage);
+export default connect(null, mapDispatchToProps)(InitialPage);
